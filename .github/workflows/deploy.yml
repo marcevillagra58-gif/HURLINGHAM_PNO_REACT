@@ -34,6 +34,10 @@ jobs:
         
       - name: Build
         run: npm run build
+        env:
+          VITE_IMGBB_API_KEY: ${{ secrets.VITE_IMGBB_API_KEY }}
+          VITE_API_ML: ${{ secrets.VITE_API_ML }}
+          VITE_API_USERS: ${{ secrets.VITE_API_USERS }}
         
       - name: Setup Pages
         uses: actions/configure-pages@v4
