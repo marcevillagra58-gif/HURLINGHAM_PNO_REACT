@@ -1,0 +1,148 @@
+.historia-main-content {
+    text-align: center;
+}
+
+/* === Map Hotspot Styles === */
+
+.container {
+    align-items: center;
+}
+
+.map-container {
+    position: relative;
+    display: inline-block;
+    padding: 0px;
+}
+
+.mapa-title{
+    padding: 5px;
+    text-align: center;
+}
+
+.mapa-text{
+    text-align: center;
+}
+
+
+.map-container img {
+    cursor: default;
+}
+
+.hotspot {
+    position: absolute;
+    cursor: pointer;
+}
+
+.map-container {
+    position: relative;
+    display: inline-block;
+}
+
+/* Quita el cursor de puntero de la imagen para que solo esté en los hotspots */
+.map-container img {
+    cursor: default;
+}
+
+.hotspot {
+    position: absolute;
+    cursor: pointer;
+    /* background-color: rgba(255, 0, 0, 0.3); /* Temporal: los hace visibles para ajustar */
+    /* border: 1px solid red; /* Temporal: los hace visibles para ajustar */
+}
+
+.map-container {
+    padding: 30px;
+    position: relative;
+    display: inline-block;
+}
+
+.mapa {
+    width: 100%;
+    max-width: 540px;
+    height: auto;
+    position: relative;
+    display: inline-block;
+}
+
+
+.map-container img {
+    cursor: default;
+}
+
+.hotspot {
+    position: absolute;
+    cursor: pointer;
+}
+
+.info-modal {
+    display: none;
+    position: fixed;
+    z-index: 100;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    justify-content: center;
+    align-items: center;
+}
+
+.info-modal.show {
+    display: flex;
+}
+
+.info-modal > div {
+    background-color: #fefefe;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 500px;
+    color: black;
+    border-radius: 5px;
+    position: relative;
+}
+
+.info-modal img {
+    width: 60%;
+    height: 60%;
+    margin-top: 1rem;
+    border-radius: 4px;
+}
+
+.info-modal .close-btn {
+    color: #aaa;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    left: auto;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    background: none;
+    border: none;
+    z-index: 101;
+}
+
+.info-modal .close-btn:hover,
+.info-modal .close-btn:focus {
+    color: #333;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+
+.info-modal.show {
+    display: flex;
+}
+
+.info-modal > div {
+    background-color: #fefefe;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 500px;
+    color: black;
+    border-radius: 5px;
+    position: relative;
+}

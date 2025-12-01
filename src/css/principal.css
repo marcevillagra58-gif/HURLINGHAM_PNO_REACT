@@ -1,0 +1,15 @@
+
+.title{
+  font-family: "Meie Script", cursive;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 50px;
+}
+
+
+.imagen-principal {
+    width: 95%; /* Ajusta el ancho de la imagen (ej: 80%) */
+    height: auto; /* Mantiene la proporción de la imagen */
+    border-radius: 10px; /* Opcional: añade bordes redondeados */
+    margin-top: 5px; /* Espacio superior */
+}

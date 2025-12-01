@@ -1,0 +1,24 @@
+.page-footer {
+    position: sticky;
+    bottom: 0;
+    z-index: 999;
+    height: 80px;
+    max-width: 100%;;
+    background: radial-gradient(circle, rgba(44, 124, 156, 1) 0%, rgba(87, 199, 133, 1) 50%, rgba(237, 221, 83, 1) 100%);
+    font-size:x-large;
+}
+
+
+.container-footer {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 100%;
+    color: white;
+}
+
+.icon-footer{
+    margin: 0 10px;
+    color: white;
+}
+
