@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import axios from 'axios';
 import { API_USERS, API_ML } from '../utils/API';
 
 /**
@@ -31,7 +30,7 @@ import { API_USERS, API_ML } from '../utils/API';
  * - name1-20, description1-20, imagen1-20: todos "" (vacíos)
  * 
  * DEPENDENCIAS:
- * - axios: POST a APIs
+ * - fetch: API nativa del browser
  * - API_USERS: API de usuarios
  * - API_ML: API de productores
  * ============================================================================
@@ -44,8 +43,13 @@ export const useUserCreate = () => {
         setIsCreating(true);
         try {
             // 1. Obtener todos los usuarios existentes para encontrar el siguiente idProductor disponible
-            const usersResponse = await axios.get(API_USERS);
-            const existingUsers = usersResponse.data;
+            const usersResponse = await fetch(API_USERS);
+
+            if (!usersResponse.ok) {
+                throw new Error(`HTTP error! status: ${usersResponse.status}`);
+            }
+
+            const existingUsers = await usersResponse.json();
 
             // Encontrar el idProductor más alto y sumar 1 (saltar 0 que es admin)
             const usedIds = existingUsers.map(u => u.idProductor || 0);
@@ -62,8 +66,20 @@ export const useUserCreate = () => {
                 password: "1234",
                 idProductor: nextIdProductor
             };
-            const authResponse = await axios.post(API_USERS, userWithCredentials);
-            const createdAuthUser = authResponse.data;
+
+            const authResponse = await fetch(API_USERS, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(userWithCredentials)
+            });
+
+            if (!authResponse.ok) {
+                throw new Error(`HTTP error! status: ${authResponse.status}`);
+            }
+
+            const createdAuthUser = await authResponse.json();
 
             // 3. Crear registro de productor correspondiente en API_ML con el mismo idProductor
             const producerData = {
@@ -84,7 +100,18 @@ export const useUserCreate = () => {
                 name5: "", description5: "", imagen5: "",
                 idProductor: nextIdProductor
             };
-            await axios.post(API_ML, producerData);
+
+            const producerResponse = await fetch(API_ML, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(producerData)
+            });
+
+            if (!producerResponse.ok) {
+                throw new Error(`HTTP error! status: ${producerResponse.status}`);
+            }
 
             setIsCreating(false);
             return createdAuthUser;

@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import axios from 'axios';
 import { API_USERS } from '../utils/API';
 
 /**
@@ -24,7 +23,7 @@ import { API_USERS } from '../utils/API';
  * - updateUser {Function}: Actualiza usuario en estado local
  * 
  * DEPENDENCIAS:
- * - axios: Peticiones HTTP
+ * - fetch: API nativa del browser
  * - API_USERS: URL de la API de usuarios
  * ============================================================================
  */
@@ -36,9 +35,15 @@ export const useUserManagement = () => {
 
     const fetchUsers = async () => {
         try {
-            const response = await axios.get(API_USERS);
+            const response = await fetch(API_USERS);
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            const data = await response.json();
             // Filtrar administrador (idProductor === 0)
-            const nonAdminUsers = response.data.filter(u => u.idProductor !== 0);
+            const nonAdminUsers = data.filter(u => u.idProductor !== 0);
             setUsers(nonAdminUsers);
             setLoading(false);
             setError(null);

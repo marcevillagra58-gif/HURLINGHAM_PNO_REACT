@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import axios from 'axios';
 import { API_ML } from '../utils/API';
 
 /**
@@ -30,7 +29,7 @@ import { API_ML } from '../utils/API';
  * - Logging de debugging en consola
  * 
  * DEPENDENCIAS:
- * - axios: Para GET a API
+ * - fetch: API nativa del browser
  * - API_ML: URL de API de productores
  * ============================================================================
  */
@@ -43,9 +42,15 @@ export const useProducerData = (id) => {
     const fetchProducer = async () => {
         console.log("Fetching producer with ID:", id);
         try {
-            const response = await axios.get(`${API_ML}/${id}`);
-            console.log("Producer fetched successfully:", response.data);
-            setProducer(response.data);
+            const response = await fetch(`${API_ML}/${id}`);
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            const data = await response.json();
+            console.log("Producer fetched successfully:", data);
+            setProducer(data);
             setLoading(false);
             setError(null);
         } catch (err) {

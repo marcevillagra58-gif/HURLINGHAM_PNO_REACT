@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import axios from 'axios';
 import { API_ML } from '../utils/API';
 
 /**
@@ -32,7 +31,7 @@ import { API_ML } from '../utils/API';
  * - Al finalizar edición: hace PUT a API y actualiza estado local
  * 
  * DEPENDENCIAS:
- * - axios: PUT a API para actualización
+ * - fetch: API nativa del browser
  * - API_ML: URL de API de productores
  * ============================================================================
  */
@@ -62,7 +61,17 @@ export const useProducerEdit = (producer, producerId, setProducer) => {
                 setProducer(updatedProducer);
 
                 // Actualización de API
-                await axios.put(`${API_ML}/${producerId}`, updatedProducer);
+                const response = await fetch(`${API_ML}/${producerId}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(updatedProducer)
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
             } catch (err) {
                 console.error("Error updating producer info:", err);
                 // Revertir actualización optimista en caso de error

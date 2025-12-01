@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import axios from 'axios';
 import { API_USERS, API_ML } from '../utils/API';
 
 /**
@@ -26,7 +25,7 @@ import { API_USERS, API_ML } from '../utils/API';
  * 5. Llama updateUserCallback para actualizar UI local
  * 
  * DEPENDENCIAS:
- * - axios: PUT a APIs
+ * - fetch: API nativa del browser
  * - API_USERS: API de usuarios
  * - API_ML: API de productores
  * ============================================================================
@@ -43,16 +42,44 @@ export const useUserBlockToggle = () => {
             // Actualizar en API_USERS
             const updatedUser = { ...user, state: newState };
             delete updatedUser.status;
-            await axios.put(`${API_USERS}/${user.id}`, updatedUser);
+
+            const response1 = await fetch(`${API_USERS}/${user.id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(updatedUser)
+            });
+
+            if (!response1.ok) {
+                throw new Error(`HTTP error! status: ${response1.status}`);
+            }
 
             // Actualizar en API_ML usando idProductor
-            const producersResponse = await axios.get(API_ML);
-            const matchingProducer = producersResponse.data.find(p => p.idProductor === user.idProductor);
+            const producersResponse = await fetch(API_ML);
+
+            if (!producersResponse.ok) {
+                throw new Error(`HTTP error! status: ${producersResponse.status}`);
+            }
+
+            const producers = await producersResponse.json();
+            const matchingProducer = producers.find(p => p.idProductor === user.idProductor);
 
             if (matchingProducer) {
                 const updatedProducer = { ...matchingProducer, state: newState };
                 delete updatedProducer.status;
-                await axios.put(`${API_ML}/${matchingProducer.id}`, updatedProducer);
+
+                const response2 = await fetch(`${API_ML}/${matchingProducer.id}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(updatedProducer)
+                });
+
+                if (!response2.ok) {
+                    throw new Error(`HTTP error! status: ${response2.status}`);
+                }
             }
 
             setIsTogglingBlock(false);

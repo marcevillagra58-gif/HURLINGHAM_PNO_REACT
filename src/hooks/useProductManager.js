@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import axios from 'axios';
 import { API_ML } from '../utils/API';
 import { getNextAvailableSlot, buildProductsArray } from '../utils/productSlotManager';
 
@@ -29,7 +28,7 @@ import { getNextAvailableSlot, buildProductsArray } from '../utils/productSlotMa
  * - Producto "nuevo" marcado con isNew=true hasta guardar
  * 
  * DEPENDENCIAS:
- * - axios: PUT a API para actualización
+ * - fetch: API nativa del browser
  * - API_ML: URL de API de productores
  * - productSlotManager: Utilidades para manejo de slots
  * ============================================================================
@@ -67,7 +66,17 @@ export const useProductManager = () => {
             setProducer(updatedProducer);
             setNewProductIndex(null);
 
-            await axios.put(`${API_ML}/${producerId}`, updatedProducer);
+            const response = await fetch(`${API_ML}/${producerId}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(updatedProducer)
+            });
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
         } catch (err) {
             console.error("Error updating product:", err);
             alert("Error al actualizar el producto.");
@@ -88,7 +97,17 @@ export const useProductManager = () => {
                 cancelNewProduct();
             }
 
-            await axios.put(`${API_ML}/${producerId}`, updatedProducer);
+            const response = await fetch(`${API_ML}/${producerId}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(updatedProducer)
+            });
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
         } catch (err) {
             console.error("Error deleting product:", err);
             alert("Error al eliminar el producto.");

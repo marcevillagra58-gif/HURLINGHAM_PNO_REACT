@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { API_USERS } from '../utils/API';
 import { AUTH_ERRORS } from '../utils/authErrors';
 
@@ -29,7 +28,7 @@ import { AUTH_ERRORS } from '../utils/authErrors';
  * - Error de conexión
  * 
  * DEPENDENCIAS:
- * - axios: Para peticiones HTTP
+ * - fetch: API nativa del browser
  * - API_USERS: URL de API de usuarios
  * - AUTH_ERRORS: Constantes de mensajes de error
  * ============================================================================
@@ -37,8 +36,13 @@ import { AUTH_ERRORS } from '../utils/authErrors';
 
 export const validateUserCredentials = async (name, password) => {
     try {
-        const response = await axios.get(API_USERS);
-        const users = response.data;
+        const response = await fetch(API_USERS);
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const users = await response.json();
         const foundUser = users.find(u => u.name === name);
 
         // Usuario no encontrado

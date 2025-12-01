@@ -1,5 +1,4 @@
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import { API_ML } from '../utils/API';
 
 /**
@@ -25,7 +24,7 @@ import { API_ML } from '../utils/API';
  * 
  * DEPENDENCIAS:
  * - react-router-dom: useNavigate para redirección
- * - axios: Para petición GET a API
+ * - fetch: API nativa del browser
  * - API_ML: URL de API de productores
  * ============================================================================
  */
@@ -50,8 +49,14 @@ export const useLoginRedirect = () => {
             // Redirección de productor
             if (user.idProductor !== 0) {
                 try {
-                    const response = await axios.get(API_ML);
-                    const producer = response.data.find(p => p.idProductor === user.idProductor);
+                    const response = await fetch(API_ML);
+
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+
+                    const producers = await response.json();
+                    const producer = producers.find(p => p.idProductor === user.idProductor);
 
                     if (producer) {
                         navigate(`/mercadolingham/producer/${producer.id}`);

@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import axios from 'axios';
 import { API_USERS } from '../utils/API';
 
 /**
@@ -30,7 +29,7 @@ import { API_USERS } from '../utils/API';
  * - Contraseña actual correcta (API)
  * 
  * DEPENDENCIAS:
- * - axios: Actualización de contraseña en API
+ * - fetch: API nativa del browser
  * - API_USERS: URL de API de usuarios
  * ============================================================================
  */
@@ -75,8 +74,13 @@ export const usePasswordChange = () => {
 
         try {
             // Obtener usuario de API_USERS para verificar contraseña anterior
-            const response = await axios.get(API_USERS);
-            const users = response.data;
+            const response = await fetch(API_USERS);
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            const users = await response.json();
             const currentUser = users.find(u => u.name === producerName);
 
             if (!currentUser) {
@@ -92,7 +96,18 @@ export const usePasswordChange = () => {
 
             // Actualizar contraseña
             const updatedUser = { ...currentUser, password: passwordData.newPassword };
-            await axios.put(`${API_USERS}/${currentUser.id}`, updatedUser);
+
+            const updateResponse = await fetch(`${API_USERS}/${currentUser.id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(updatedUser)
+            });
+
+            if (!updateResponse.ok) {
+                throw new Error(`HTTP error! status: ${updateResponse.status}`);
+            }
 
             alert("Contraseña actualizada correctamente.");
             closePasswordModal();

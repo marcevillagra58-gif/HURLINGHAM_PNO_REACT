@@ -1,5 +1,3 @@
-import axios from 'axios';
-
 /**
  * ============================================================================
  * MÓDULO DE UTILIDADES: API.js
@@ -37,7 +35,7 @@ import axios from 'axios';
  * - useProductCarousel hook
  * 
  * DEPENDENCIAS:
- * - axios: Para peticiones HTTP
+ * - fetch: API nativa del browser
  * - Vite env vars: import.meta.env.VITE_*
  * ============================================================================
  */
@@ -58,13 +56,31 @@ if (!API_USERS) {
     console.error('Error: VITE_API_USERS no está definida en el archivo .env');
 }
 
+/**
+ * Función para subir imágenes a ImgBB
+ * @param {File} file - Archivo de imagen a subir
+ * @returns {Promise<string>} URL de la imagen subida
+ */
 export const uploadImageToImgBB = async (file) => {
     const formData = new FormData();
     formData.append('image', file);
 
     try {
-        const response = await axios.post(`https://api.imgbb.com/1/upload?key=${IMGBB_API_KEY}`, formData);
-        return response.data.data.url;
+        const response = await fetch(
+            `https://api.imgbb.com/1/upload?key=${IMGBB_API_KEY}`,
+            {
+                method: 'POST',
+                body: formData,
+                // NO incluir Content-Type para FormData - el browser lo establece automáticamente
+            }
+        );
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        return data.data.url;
     } catch (error) {
         console.error('Error uploading image to ImgBB:', error);
         throw error;

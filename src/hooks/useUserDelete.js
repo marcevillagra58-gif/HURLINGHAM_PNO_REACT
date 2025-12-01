@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import axios from 'axios';
 import { API_USERS, API_ML } from '../utils/API';
 
 /**
@@ -31,7 +30,7 @@ import { API_USERS, API_ML } from '../utils/API';
  * - Muestra alert al usuario en caso de error
  * 
  * DEPENDENCIAS:
- * - axios: DELETE a APIs
+ * - fetch: API nativa del browser
  * - API_USERS: API de usuarios
  * - API_ML: API de productores
  * ============================================================================
@@ -44,14 +43,32 @@ export const useUserDelete = () => {
         setIsDeleting(true);
         try {
             // Eliminar de API_USERS
-            await axios.delete(`${API_USERS}/${user.id}`);
+            const response1 = await fetch(`${API_USERS}/${user.id}`, {
+                method: 'DELETE'
+            });
+
+            if (!response1.ok) {
+                throw new Error(`HTTP error! status: ${response1.status}`);
+            }
 
             // Buscar y eliminar de API_ML usando idProductor
-            const producersResponse = await axios.get(API_ML);
-            const matchingProducer = producersResponse.data.find(p => p.idProductor === user.idProductor);
+            const producersResponse = await fetch(API_ML);
+
+            if (!producersResponse.ok) {
+                throw new Error(`HTTP error! status: ${producersResponse.status}`);
+            }
+
+            const producers = await producersResponse.json();
+            const matchingProducer = producers.find(p => p.idProductor === user.idProductor);
 
             if (matchingProducer) {
-                await axios.delete(`${API_ML}/${matchingProducer.id}`);
+                const response2 = await fetch(`${API_ML}/${matchingProducer.id}`, {
+                    method: 'DELETE'
+                });
+
+                if (!response2.ok) {
+                    throw new Error(`HTTP error! status: ${response2.status}`);
+                }
             }
 
             setIsDeleting(false);

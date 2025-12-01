@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import '../css/mercadolingham.css';
 import { API_ML } from '../utils/API';
 
@@ -23,7 +22,7 @@ import { API_ML } from '../utils/API';
  * - Ninguna (obtiene datos de API directamente)
  * 
  * DEPENDENCIAS:
- * - axios: Peticiones HTTP
+ * - fetch: API nativa del browser
  * - API_ML: URL de API de productores
  * ============================================================================
  */
@@ -36,8 +35,14 @@ const Producers = () => {
     useEffect(() => {
         const fetchProducers = async () => {
             try {
-                const response = await axios.get(API_ML);
-                setProducers(response.data);
+                const response = await fetch(API_ML);
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const data = await response.json();
+                setProducers(data);
                 setLoading(false);
             } catch (err) {
                 setError(err);
