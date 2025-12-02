@@ -6,6 +6,13 @@ import App from './App.jsx'
 import { TransitionProvider } from './components/Transition.jsx'
 import { AuthProvider } from './context/AuthContext.jsx'
 
+// Manejar redirección desde 404.html para rutas SPA en GitHub Pages
+const redirect = sessionStorage.getItem('redirect');
+if (redirect && redirect !== window.location.pathname) {
+  sessionStorage.removeItem('redirect');
+  window.history.replaceState(null, '', redirect);
+}
+
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <BrowserRouter basename="/HURLINGHAM_PNO_REACT" future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>

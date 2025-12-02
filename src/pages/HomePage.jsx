@@ -1,6 +1,6 @@
 import React from 'react';
 import { useTransition } from '../components/Transition';
-import escudo from '/assets/escudo.jpeg';
+import { getAssetPath } from '../utils/assetPath.js';
 import '../css/infinito.css';
 
 /**
@@ -54,7 +54,7 @@ const HomePage = () => {
                     ))}
                 </div>
                 <div className="center-content">
-                    <img src={escudo} alt="Logo" className="logo-infinito" />
+                    <img src={getAssetPath('/assets/escudo.jpeg')} alt="Logo" className="logo-infinito" />
                 </div>
             </div>
             <div className="wrapper">

@@ -59,16 +59,19 @@ export const musicians = [
     },
 ];
 
+import { getAssetPath } from '../utils/assetPath.js';
+
 /**
  * Data for murals
  */
 export const murals = [
-    { id: 1, imageUrl: '/assets/Murales/mural 1.jpg', alt: 'Mural Paisano' },
-    { id: 2, imageUrl: '/assets/Murales/mural 2.jpg', alt: 'Mural mi lugar' },
-    { id: 3, imageUrl: '/assets/Murales/mural 3.jpg', alt: 'Mural dictadura' },
-    { id: 4, imageUrl: '/assets/Murales/mural 4.jpg', alt: 'Mural de trabajadores' },
-    { id: 5, imageUrl: '/assets/Murales/mural 5.jpg', alt: 'Mural de ave' },
-    { id: 6, imageUrl: '/assets/Murales/mural 6.jpg', alt: 'Mural de edificio' },
-    { id: 7, imageUrl: '/assets/Murales/mural 7.webp', alt: 'Mural mujer con flores' },
-    { id: 8, imageUrl: '/assets/Murales/mural 8.jpg', alt: 'Mural pareja' },
+    { id: 1, imageUrl: getAssetPath('/assets/Murales/mural 1.jpg'), alt: 'Mural Paisano' },
+    { id: 2, imageUrl: getAssetPath('/assets/Murales/mural 2.jpg'), alt: 'Mural mi lugar' },
+    { id: 3, imageUrl: getAssetPath('/assets/Murales/mural 3.jpg'), alt: 'Mural dictadura' },
+    { id: 4, imageUrl: getAssetPath('/assets/Murales/mural 4.jpg'), alt: 'Mural de trabajadores' },
+    { id: 5, imageUrl: getAssetPath('/assets/Murales/mural 5.jpg'), alt: 'Mural de ave' },
+    { id: 6, imageUrl: getAssetPath('/assets/Murales/mural 6.jpg'), alt: 'Mural de edificio' },
+    { id: 7, imageUrl: getAssetPath('/assets/Murales/mural 7.webp'), alt: 'Mural mujer con flores' },
+    { id: 8, imageUrl: getAssetPath('/assets/Murales/mural 8.jpg'), alt: 'Mural pareja' },
 ];
+

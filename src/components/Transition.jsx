@@ -1,6 +1,7 @@
 import React, { useState, createContext, useContext } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import '../css/transition.css';
+import { getAssetPath } from '../utils/assetPath.js';
 
 const TransitionContext = createContext();
 
@@ -65,7 +66,7 @@ export const TransitionProvider = ({ children }) => {
             {children}
             {(isTransitioning || transitionClass) && (
                 <div id="transition-overlay" className={transitionClass}>
-                    <img src="/assets/logo H.png" alt="transition" />
+                    <img src={getAssetPath("/assets/logo H.png")} alt="transition" />
                 </div>
             )}
         </TransitionContext.Provider>

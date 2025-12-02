@@ -5,6 +5,7 @@ import 'swiper/css/effect-coverflow';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import '../css/carrusel.css';
+import { getAssetPath } from '../utils/assetPath.js';
 
 import { EffectCoverflow, Pagination, Navigation } from 'swiper/modules';
 
@@ -34,16 +35,16 @@ import { EffectCoverflow, Pagination, Navigation } from 'swiper/modules';
  */
 
 const carouselImages = [
-  { imagePath: "/assets/Carrusel/imagen 1.jpg", description: "Centro Cultural Leopoldo Marechal" },
-  { imagePath: "/assets/Carrusel/imagen 10.jpg", description: "Centro Comercial Peseo Florido" },
-  { imagePath: "/assets/Carrusel/imagen 2.jpg", description: "Estación Hurlingham" },
-  { imagePath: "/assets/Carrusel/imagen 3.jpg", description: "Edificio Municipal de noche" },
-  { imagePath: "/assets/Carrusel/imagen 4.jpg", description: "Hospital San Bernardino" },
-  { imagePath: "/assets/Carrusel/imagen 5.jpg", description: "Edificio Municipal" },
-  { imagePath: "/assets/Carrusel/imagen 6.jpg", description: "Parroquia Nuestra Señora del Camino" },
-  { imagePath: "/assets/Carrusel/imagen 7.jpeg", description: "Plaza Jhon Ravenscroft" },
-  { imagePath: "/assets/Carrusel/imagen 8.webp", description: "Hurlingham Club" },
-  { imagePath: "/assets/Carrusel/imagen 9.jpg", description: "Universidad de Hurlingham" }
+  { imagePath: getAssetPath("/assets/Carrusel/imagen 1.jpg"), description: "Centro Cultural Leopoldo Marechal" },
+  { imagePath: getAssetPath("/assets/Carrusel/imagen 10.jpg"), description: "Centro Comercial Peseo Florido" },
+  { imagePath: getAssetPath("/assets/Carrusel/imagen 2.jpg"), description: "Estación Hurlingham" },
+  { imagePath: getAssetPath("/assets/Carrusel/imagen 3.jpg"), description: "Edificio Municipal de noche" },
+  { imagePath: getAssetPath("/assets/Carrusel/imagen 4.jpg"), description: "Hospital San Bernardino" },
+  { imagePath: getAssetPath("/assets/Carrusel/imagen 5.jpg"), description: "Edificio Municipal" },
+  { imagePath: getAssetPath("/assets/Carrusel/imagen 6.jpg"), description: "Parroquia Nuestra Señora del Camino" },
+  { imagePath: getAssetPath("/assets/Carrusel/imagen 7.jpeg"), description: "Plaza Jhon Ravenscroft" },
+  { imagePath: getAssetPath("/assets/Carrusel/imagen 8.webp"), description: "Hurlingham Club" },
+  { imagePath: getAssetPath("/assets/Carrusel/imagen 9.jpg"), description: "Universidad de Hurlingham" }
 ];
 
 function Carousel() {
@@ -76,8 +77,8 @@ function Carousel() {
       {carouselImages.map((item, index) => (
         <SwiperSlide key={index}>
           <div className="img-card">
-            <img src={item.imagePath} alt={item.description} />
-            <p>{item.description}</p>
+            <img className="image-card" src={item.imagePath} alt={item.description} />
+            <p className="description-card">{item.description}</p>
           </div>
         </SwiperSlide>
       ))}

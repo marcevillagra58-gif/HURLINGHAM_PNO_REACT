@@ -26,6 +26,8 @@
  * ============================================================================
  */
 
+import { getAssetPath } from '../utils/assetPath.js';
+
 /**
  * Datos de instituciones educativas para la visualización atómica
  */
@@ -33,7 +35,7 @@ export const educationData = {
     center: {
         id: 'unahur',
         name: 'UNaHur',
-        image: '/assets/Educacion/Unahur.jpg',
+        image: getAssetPath('/assets/Educacion/Unahur.jpg'),
         link: 'https://unahur.edu.ar/',
     },
     orbits: [
@@ -44,13 +46,13 @@ export const educationData = {
                 {
                     id: 'eest2',
                     name: 'EEST N°2 República del Perú',
-                    image: '/assets/Educacion/EEST N°2 República del Perú.jpg',
+                    image: getAssetPath('/assets/Educacion/EEST N°2 República del Perú.jpg'),
                     link: 'https://eestn2rp.com.ar/',
                 },
                 {
                     id: 'san-jose',
                     name: 'San José de Calasanz',
-                    image: '/assets/Educacion/San Jose de Calazans.jpg',
+                    image: getAssetPath('/assets/Educacion/San Jose de Calazans.jpg'),
                     link: 'https://sjdecalasanz.edu.ar/',
                 },
             ],
@@ -62,13 +64,13 @@ export const educationData = {
                 {
                     id: 'echeverria',
                     name: 'Secundaria Esteban Echeverría',
-                    image: '/assets/Educacion/Secundaria Esteban Echeverría.webp',
+                    image: getAssetPath('/assets/Educacion/Secundaria Esteban Echeverría.webp'),
                     link: 'https://www.hurlinghamaldia.com/el-echeverria-cumplio-50-anos/',
                 },
                 {
                     id: 'moreno',
                     name: 'Secundaria Mariano Moreno',
-                    image: '/assets/Educacion/Secundaria Mariano Moreno.jpg',
+                    image: getAssetPath('/assets/Educacion/Secundaria Mariano Moreno.jpg'),
                     link: 'https://www.immhurlingham.com.ar/',
                 },
             ],
@@ -80,19 +82,19 @@ export const educationData = {
                 {
                     id: 'sagrado-corazon',
                     name: 'Secundaria Sagrado Corazón de Jesús',
-                    image: '/assets/Educacion/Secundaria Sagrado Corazon de Jesus.jpg',
+                    image: getAssetPath('/assets/Educacion/Secundaria Sagrado Corazon de Jesus.jpg'),
                     link: 'https://sagradocorazon.edu.ar/',
                 },
                 {
                     id: 'st-hildas',
                     name: "St.Hilda's College",
-                    image: "/assets/Educacion/St.Hilda's College.jpg",
+                    image: getAssetPath("/assets/Educacion/St.Hilda's College.jpg"),
                     link: 'https://www.sthildas.esc.edu.ar/',
                 },
                 {
                     id: 'stepinac',
                     name: 'Instituto Cardenal Stepinac',
-                    image: '/assets/Educacion/Cardenal Stepinac.webp',
+                    image: getAssetPath('/assets/Educacion/Cardenal Stepinac.webp'),
                     link: 'https://www.stepinac.edu.ar/',
                 },
             ],
