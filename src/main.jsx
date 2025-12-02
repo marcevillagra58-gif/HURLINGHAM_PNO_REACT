@@ -1,26 +1,22 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import { BrowserRouter } from 'react-router-dom'
+import { HashRouter } from 'react-router-dom'
 import './css/index.css'
 import App from './App.jsx'
 import { TransitionProvider } from './components/Transition.jsx'
 import { AuthProvider } from './context/AuthContext.jsx'
 
-// Manejar redirección desde 404.html para rutas SPA en GitHub Pages
-const redirect = sessionStorage.getItem('redirect');
-if (redirect && redirect !== window.location.pathname) {
-  sessionStorage.removeItem('redirect');
-  window.history.replaceState(null, '', redirect);
-}
+// HashRouter evita problemas de 404 en GitHub Pages al usar #
+// No necesita redirección desde 404.html ni configuración del servidor
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <BrowserRouter basename="/HURLINGHAM_PNO_REACT" future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+    <HashRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
       <AuthProvider>
         <TransitionProvider>
           <App />
         </TransitionProvider>
       </AuthProvider>
-    </BrowserRouter>
+    </HashRouter>
   </StrictMode>,
 )
