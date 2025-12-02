@@ -1,15 +1,30 @@
 /**
- * Utility function to get the correct asset path for GitHub Pages deployment
+ * =============================================================================
+ * UTILIDAD: getAssetPath
+ * =============================================================================
  * 
- * In development: returns /assets/image.jpg
- * In production (GitHub Pages): returns /HURLINGHAM_PNO_REACT/assets/image.jpg
+ * DESCRIPCIÓN:
+ * Función utilitaria para obtener la ruta correcta de assets en deployment
+ * de GitHub Pages. Maneja automáticamente el base path según el entorno.
  * 
- * @param {string} path - The asset path relative to public folder (e.g., "/assets/image.jpg")
- * @returns {string} - The full path with base URL
+ * EJEMPLOS:
+ * - En desarrollo: devuelve /assets/image.jpg
+ * - En producción (GitHub Pages): devuelve /HURLINGHAM_PNO_REACT/assets/image.jpg
+ * 
+ * PARÁMETROS:
+ * @param {string} path - Ruta del asset relativa a carpeta public (ej: "/assets/image.jpg")
+ * 
+ * RETORNA:
+ * @returns {string} - Ruta completa con el base URL
+ * 
+ * USO:
+ * import { getAssetPath } from '../utils/assetPath.js';
+ * <img src={getAssetPath("/assets/logo.png")} />
+ * =============================================================================
  */
 export const getAssetPath = (path) => {
-    // Remove leading slash if present to avoid double slashes
+    // Remover slash inicial si existe para evitar dobles slashes
     const cleanPath = path.startsWith('/') ? path.slice(1) : path;
-    // import.meta.env.BASE_URL already includes trailing slash
+    // import.meta.env.BASE_URL ya incluye el trailing slash
     return `${import.meta.env.BASE_URL}${cleanPath}`;
 };
