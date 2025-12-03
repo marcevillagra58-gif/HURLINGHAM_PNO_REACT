@@ -39,14 +39,20 @@ function Header() {
   const navigate = useNavigate();
   const { isAuthenticated, user, logout, setError } = useAuth();
   const [isLoginFormVisible, setLoginFormVisible] = useState(false);
+  const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const toggleLoginForm = () => {
     setError(null);
     setLoginFormVisible(!isLoginFormVisible);
   };
 
+  const toggleMobileMenu = () => {
+    setMobileMenuOpen(!isMobileMenuOpen);
+  };
+
   const handleNavigate = (e, to) => {
     e.preventDefault();
+    setMobileMenuOpen(false); // Close mobile menu on navigation
     transition(to);
   };
 
@@ -65,15 +71,22 @@ function Header() {
     <header className={location.pathname === '/homepage' ? 'homepage-header' : ''}>
       <nav>
         {location.pathname !== '/homepage' &&
-          <ul className="main-nav">
-            <li><a href="/homepage" onClick={(e) => handleNavigate(e, '/homepage')} className={getLinkClass('/homepage')}>Inicio</a></li>
-            <li><a href="/principal" onClick={(e) => handleNavigate(e, '/principal')} className={getLinkClass('/principal')}>Principal</a></li>
-            <li><a href="/historia" onClick={(e) => handleNavigate(e, '/historia')} className={getLinkClass('/historia')}>Historia</a></li>
-            <li><a href="/educacion" onClick={(e) => handleNavigate(e, '/educacion')} className={getLinkClass('/educacion')}>Educación</a></li>
-            <li><a href="/cultura" onClick={(e) => handleNavigate(e, '/cultura')} className={getLinkClass('/cultura')}>Cultura</a></li>
-            <li><a href="/imagenes" onClick={(e) => handleNavigate(e, '/imagenes')} className={getLinkClass('/imagenes')}>Imágenes</a></li>
-            <li><a href="/mercadolingham" onClick={(e) => handleNavigate(e, '/mercadolingham')} className={getLinkClass('/mercadolingham')}>MercadoLingham</a></li>
-          </ul>
+          <>
+            <div className="hamburger-menu" onClick={toggleMobileMenu}>
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+            <ul className={`main-nav ${isMobileMenuOpen ? 'active' : ''}`}>
+              <li><a href="/homepage" onClick={(e) => handleNavigate(e, '/homepage')} className={getLinkClass('/homepage')}>Inicio</a></li>
+              <li><a href="/principal" onClick={(e) => handleNavigate(e, '/principal')} className={getLinkClass('/principal')}>Principal</a></li>
+              <li><a href="/historia" onClick={(e) => handleNavigate(e, '/historia')} className={getLinkClass('/historia')}>Historia</a></li>
+              <li><a href="/educacion" onClick={(e) => handleNavigate(e, '/educacion')} className={getLinkClass('/educacion')}>Educación</a></li>
+              <li><a href="/cultura" onClick={(e) => handleNavigate(e, '/cultura')} className={getLinkClass('/cultura')}>Cultura</a></li>
+              <li><a href="/imagenes" onClick={(e) => handleNavigate(e, '/imagenes')} className={getLinkClass('/imagenes')}>Imágenes</a></li>
+              <li><a href="/mercadolingham" onClick={(e) => handleNavigate(e, '/mercadolingham')} className={getLinkClass('/mercadolingham')}>MercadoLingham</a></li>
+            </ul>
+          </>
         }
         <ul className="auth-links">
           {isAuthenticated ? (
