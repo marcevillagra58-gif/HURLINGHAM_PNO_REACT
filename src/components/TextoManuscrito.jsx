@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import Vara from 'vara';
 import { getAssetPath } from '../utils/assetPath.js';
+import useResponsiveFontSize from '../hooks/useResponsiveFontSize';
 
 const TextoManuscrito = ({
   texto = "",
@@ -9,6 +10,9 @@ const TextoManuscrito = ({
 }) => {
   const idUnico = useRef(`vara-container-${Math.random().toString(36).substr(2, 9)}`).current;
   const varaInstanceRef = useRef(null);
+
+  // Use responsive font size based on screen width
+  const responsiveTamano = useResponsiveFontSize(tamano);
 
   useEffect(() => {
     if (varaInstanceRef.current) return;
@@ -24,13 +28,13 @@ const TextoManuscrito = ({
       [
         {
           text: texto,
-          fontSize: tamano,
+          fontSize: responsiveTamano,
           strokeWidth: 2,
           color: color,
           duration: 2000,
           delay: 1000,
           textAlign: "center",
-          y: tamano / 2
+          y: responsiveTamano / 2
         }
       ],
       {
@@ -45,15 +49,15 @@ const TextoManuscrito = ({
         varaInstanceRef.current = null;
       }
     };
-  }, [texto, tamano, color, idUnico]);
+  }, [texto, tamano, color, idUnico, responsiveTamano]);
 
   return <div
     id={idUnico}
     style={{
       width: "100%",
-      height: `${tamano * 2}px`,
+      height: `${responsiveTamano * 2}px`,
       overflow: "hidden",
-      marginBottom: `-${tamano / 10}px`
+      marginBottom: `-${responsiveTamano / 10}px`
     }}
   />;
 };
