@@ -471,7 +471,143 @@ const navigate = useNavigate();
 
 ---
 
+## 📱 Diseño Responsive
+
+### 🎯 Overview
+
+Todo el sitio está optimizado para dispositivos móviles, tablets y desktop. Se implementaron breakpoints estratégicos y componentes adaptativos para garantizar una experiencia de usuario óptima en todas las resoluciones.
+
+### 📏 Breakpoints Utilizados
+
+| Breakpoint | Dispositivo | Cambios Aplicados |
+|------------|-------------|-------------------|
+| ≤ 480px | Móviles extra pequeños | Texto 50%, layout compacto |
+| ≤ 600px | Móviles pequeños | Texto 60%, padding reducido |
+| ≤ 768px | Móviles medianos | Texto 70%, footer vertical |
+| ≤ 912px | Tablets / móviles grandes | Texto 85%, infinito vertical |
+| ≤ 1200px | Desktop pequeño | Texto 95% |
+| > 1200px | Desktop | Tamaño completo 100% |
+
+### 🧩 Componentes Responsive
+
+#### 1. Header (Navegación)
+
+**Archivo:** `src/css/Header.css` + `src/components/Header.jsx`
+
+**Características:**
+- **Desktop (> 912px):** Navegación horizontal completa
+- **Mobile (≤ 912px):** 
+  - Menú hamburguesa (3 líneas)
+  - Navegación vertical desplegable
+  - Cierre automático al seleccionar opción
+  - Botones Login/Logout siempre visibles
+
+**Breakpoints específicos:**
+```css
+@media (max-width: 768px)  /* Tablet */
+@media (max-width: 480px)  /* Mobile pequeño */
+```
+
+#### 2. Footer
+
+**Archivo:** `src/css/Footer.css`
+
+**Características:**
+- **Desktop:** Layout horizontal con `justify-content: space-around`
+- **Mobile (≤ 768px):**
+  - Layout vertical (`flex-direction: column`)
+  - Textos centrados
+  - Iconos de redes sociales reducidos
+  - Altura variable según contenido
+
+#### 3. Diseño Infinito (HomePage)
+
+**Archivo:** `src/css/infinito.css`
+
+**Características:**
+- **Desktop (> 912px):** Círculos horizontales lado a lado
+- **Mobile/Tablet (≤ 912px):**
+  - Círculos apilados verticalmente (top/bottom)
+  - Wrapper 1 (izquierdo) → arriba
+  - Wrapper 2 (derecho) → abajo
+  - Animación de rotación mantenida
+  - Escalado progresivo en 600px y 480px
+
+**Código clave:**
+```css
+@media (max-width: 912px) {
+  .wrapper:nth-child(1) { top: 0; }
+  .wrapper:nth-child(2) { bottom: 0; }
+}
+```
+
+#### 4. TextoManuscrito (Títulos Animados)
+
+**Archivos:** 
+- `src/hooks/useResponsiveFontSize.js` (NUEVO)
+- `src/components/TextoManuscrito.jsx`
+
+**Características:**
+- Hook personalizado `useResponsiveFontSize`
+- Escalado automático basado en `window.innerWidth`
+- Se adapta en tiempo real al redimensionar ventana
+- Sin necesidad de recargar página
+
+**Escalado aplicado:**
+| Ancho | Porcentaje | Ejemplo (base 50px) |
+|-------|------------|---------------------|
+| ≤ 480px | 50% | 25px |
+| ≤ 600px | 60% | 30px |
+| ≤ 768px | 70% | 35px |
+| ≤ 912px | 85% | 42.5px |
+| ≤ 1200px | 95% | 47.5px |
+| > 1200px | 100% | 50px |
+
+**Páginas afectadas:**
+- PrincipalPage ("Bienvenidos a Hurlingham")
+- EducacionPage ("Educacion")
+- HistoriaPage ("HURLINGHAM: Su Historia")
+- CulturaPage ("Cultura")
+- MercadolinghamPage ("MercadoLingham")
+
+### 🎨 Optimizaciones Visuales
+
+- **Imágenes:** Se mantienen en `object-fit: contain` para evitar distorsión
+- **Espaciado:** Padding y margins ajustados proporcionalmente
+- **Fuentes:** Uso de unidades relativas (`em`, `%`, `vw`, `vh`)
+- **Transiciones:** Suaves en redimensionamiento
+- **Z-index:** Mantenido para evitar overlapping en mobile
+
+### ✅ Testing Realizado
+
+**Dispositivos probados:**
+- iPhone SE (375px)
+- iPhone 12 Pro (390px)
+- iPad (768px)
+- Desktop (1920px)
+
+**Aspectos verificados:**
+- ✅ Navegación funcional en todos los tamaños
+- ✅ Footer legible sin superposiciones
+- ✅ Diseño infinito sin elementos cortados
+- ✅ Texto manuscrito escalado correctamente
+- ✅ Imágenes responsivas manteniendo aspecto
+
+### 📦 Archivos Modificados/Creados
+
+| Archivo | Tipo | Cambio |
+|---------|------|--------|
+| `Header.css` | CSS | Media queries + hamburger menu |
+| `Header.jsx` | Component | Estado mobile menu |
+| `Footer.css` | CSS | Layout vertical mobile |
+| `infinito.css` | CSS | Posicionamiento vertical circles |
+| `useResponsiveFontSize.js` | Hook | **NUEVO** - Cálculo responsive |
+| `TextoManuscrito.jsx` | Component | Integración hook responsive |
+
+---
+
 **Proyecto:** Hurlingham PNO  
 **Total Páginas:** 10  
 **Páginas Complejas:** 2  
-**APIs Utilizadas:** MockAPI (2 endpoints) + ImgBB
+**APIs Utilizadas:** MockAPI (2 endpoints) + ImgBB  
+**Responsive:** ✅ Completamente responsive (480px - 1920px+)

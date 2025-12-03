@@ -254,7 +254,55 @@ Header Navigation
 
 ---
 
+## 📱 Diseño Responsive
+
+### Breakpoints Globales
+
+El sitio es completamente responsive con los siguientes breakpoints:
+
+| Breakpoint | Tipo de Dispositivo | Cambios Principales |
+|------------|---------------------|---------------------|
+| > 1200px | Desktop | Tamaño completo (100%) |
+| ≤ 1200px | Desktop pequeño | Reducción al 95% |
+| ≤ 912px | Tablet / Mobile grande | Header: menú hamburguesa, Infinito: vertical |
+| ≤ 768px | Tablet / Mobile mediano | Footer: layout vertical |
+| ≤ 600px | Mobile pequeño | Reducción al 60% |
+| ≤ 480px | Mobile extra pequeño | Reducción al 50% |
+
+### Navegación Responsive
+
+#### Desktop (> 912px)
+```
+Header: [Inicio] [Principal] [Historia] [Educación] [Cultura] [Imágenes] [MercadoLingham] ... [Login/Admin]
+```
+
+#### Mobile (≤ 912px)
+```
+Header: [☰ Hamburger] ... [Login/Admin]
+        ↓ Click en hamburger
+        [Menú Vertical]
+        ├─ Inicio
+        ├─ Principal  
+        ├─ Historia
+        ├─ Educación
+        ├─ Cultura
+        ├─ Imágenes
+        └─ MercadoLingham
+```
+
+### Componentes Adaptativos
+
+| Componente | Desktop | Mobile |
+|------------|---------|--------|
+| **Header** | Navegación horizontal | Menú hamburguesa |
+| **Footer** | Horizontal (space-around) | Vertical (column) |
+| **HomePage Infinito** | Círculos lado a lado | Círculos apilados (top/bottom) |
+| **Títulos (Escritor)** | Tamaño completo | Escalado progresivo |
+
+---
+
 **Proyecto:** Hurlingham PNO  
 **Total Rutas:** 10 páginas  
 **Rutas Protegidas:** 1 (/admin)  
-**Rutas Dinámicas:** 1 (/producer/:id)
+**Rutas Dinámicas:** 1 (/producer/:id)  
+**Responsive:** ✅ Totalmente responsive (480px - 1920px+)
