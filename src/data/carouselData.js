@@ -1,3 +1,23 @@
+/**
+ * ============================================================================
+ * ARCHIVO DE DATOS: carouselData.js
+ * ============================================================================
+ * 
+ * DESCRIPCIÓN:
+ * Array de objetos con las imágenes y descripciones para el carrusel
+ * de lugares emblemáticos de Hurlingham.
+ * 
+ * USADO POR:
+ * - Carousel.jsx (importa y renderiza las imágenes)
+ * 
+ * ESTRUCTURA DE DATOS:
+ * - Array de objetos con:
+ *   - imagePath: Ruta completa a la imagen (usando getAssetPath)
+ *   - description: Texto descriptivo de la imagen
+ * 
+ * ============================================================================
+ */
+
 import { getAssetPath } from '../utils/assetPath.js';
 
 export const carouselImages = [
