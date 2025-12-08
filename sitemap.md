@@ -1,5 +1,4 @@
 # Mapa de Rutas - Hurlingham PNO
-
 ## 📍 Estructura de Navegación
 
 ```mermaid
