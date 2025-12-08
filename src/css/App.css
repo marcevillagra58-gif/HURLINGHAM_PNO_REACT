@@ -5,7 +5,6 @@
   text-align: center;
 }
 
-/* Sticky footer layout - ensures footer always at bottom */
 .app-container {
   display: flex;
   flex-direction: column;

@@ -20,19 +20,16 @@
     justify-content: center;
     align-items: center;
     box-sizing: border-box;
-    /* overflow: hidden;  <-- Removed to allow external buttons */
 }
 
-/* Navigation Buttons */
+
 .swiper-button-next,
 .swiper-button-prev {
     background-color: rgba(255, 255, 255, 0.8);
-    /* Lighter background for product carousel */
     border-radius: 50%;
     width: 50px;
     height: 50px;
     color: #2c3e50;
-    /* Dark arrow color */
     font-weight: bold;
 }
 
@@ -41,7 +38,6 @@
     font-size: 25px;
 }
 
-/* Pagination */
 .swiper-pagination-bullet {
     background: #ccc;
     opacity: 0.7;
@@ -49,15 +45,12 @@
 
 .swiper-pagination-bullet-active {
     background: #2c3e50;
-    /* Match theme */
 }
 
-/* Vertical Swiper Specifics (Moved from producerDetails.css) */
 .vertical-swiper {
     width: 100%;
     height: 100%;
     padding: 0 60px;
-    /* Add padding for arrows */
     box-sizing: border-box;
 }
 
@@ -69,7 +62,6 @@
     opacity: 0.5;
     transform: scale(0.8);
     width: auto;
-    /* Allow width to be determined by content/max-width */
     height: auto;
 }
 
@@ -79,7 +71,6 @@
     z-index: 10;
 }
 
-/* Wrapper to hold card and buttons side-by-side */
 .slide-content-wrapper {
     display: flex;
     align-items: center;
@@ -89,15 +80,11 @@
     height: 100%;
 }
 
-/* Image Card Styles */
 .img-card {
     position: relative;
     width: 80%;
-    /* Reduced width */
     max-width: 1200px;
-    /* Reduced max-width */
     aspect-ratio: 16 / 9;
-    /* Slightly taller aspect ratio */
     border-radius: 15px;
     overflow: hidden;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
@@ -114,26 +101,18 @@
     object-fit: cover;
 }
 
-/* Active slide layout: Side-by-side */
 .vertical-swiper .swiper-slide-active .img-card {
     flex-direction: row;
     align-items: stretch;
 }
-
-/* Specific override for active slide image to ensure it fits */
 .vertical-swiper .swiper-slide-active .img-card img {
     width: 50%;
-    /* Keep 50% width of the card */
     height: 100%;
     object-fit: contain;
-    /* Ensure image fits completely without cropping */
     padding: 10px;
-    /* Add some padding so it doesn't touch edges */
     background-color: #fff;
-    /* Ensure background is white */
 }
 
-/* Product Info */
 .product-info-carousel {
     padding: 20px;
     text-align: center;
@@ -143,7 +122,6 @@
     display: none;
 }
 
-/* Active slide info: Visible and on the right */
 .vertical-swiper .swiper-slide-active .product-info-carousel {
     display: flex;
     flex-direction: column;
@@ -170,15 +148,11 @@
     line-height: 1.5;
 }
 
-/* Vertical Navigation Arrows Positioning */
 .vertical-swiper .swiper-button-next,
 .vertical-swiper .swiper-button-prev {
     color: black !important;
-    /* Force black color */
     background-color: rgba(255, 255, 255, 0.8);
-    /* White background circle */
     border-radius: 50%;
-    /* Make it round */
     transform: rotate(90deg);
     right: 15px !important;
     left: auto !important;
@@ -186,12 +160,10 @@
     height: 50px !important;
     position: absolute;
     z-index: 1000 !important;
-    /* Ensure on top of everything */
     display: flex;
     justify-content: center;
     align-items: center;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    /* Add shadow for visibility */
 }
 
 .vertical-swiper .swiper-button-prev {
@@ -202,16 +174,13 @@
     top: 95% !important;
 }
 
-/* External Actions Container */
 .external-actions {
     display: flex;
     flex-direction: column;
     gap: 10px;
     z-index: 1001;
-    /* Above everything */
 }
 
-/* Buttons */
 .edit-btn-card,
 .delete-btn-card,
 .cancel-btn-card,
@@ -219,7 +188,6 @@
     padding: 10px 20px;
     border: none;
     border-radius: 50px;
-    /* Rounded pill shape */
     font-weight: bold;
     cursor: pointer !important;
     color: white;
@@ -246,7 +214,6 @@
     background-color: #2ecc71;
 }
 
-/* Edit Form Styles */
 .edit-form {
     display: flex;
     flex-direction: column;
@@ -273,7 +240,6 @@
     font-family: inherit;
 }
 
-/* Modal Styles */
 .modal-overlay {
     position: fixed;
     top: 0;
@@ -331,7 +297,6 @@
     background-color: #e74c3c;
 }
 
-/* Image Upload Styles */
 .image-upload-container {
     width: 50%;
     height: 100%;
