@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../css/mercadolingham.css';
 import { API_ML } from '../utils/API';
 
@@ -16,7 +17,7 @@ import { API_ML } from '../utils/API';
  * - ProductoresPage.jsx (componente padre)
  * 
  * PROPORCIONA DATOS A:
- * - Ninguno (navegación a detalles via window.open)
+ * - Ninguno (navegación a detalles via useNavigate)
  * 
  * PROPS:
  * - Ninguna (obtiene datos de API directamente)
@@ -24,10 +25,12 @@ import { API_ML } from '../utils/API';
  * DEPENDENCIAS:
  * - fetch: API nativa del browser
  * - API_ML: URL de API de productores
+ * - useNavigate: Hook de react-router-dom para navegación
  * ============================================================================
  */
 
 const Producers = () => {
+    const navigate = useNavigate();
     const [producers, setProducers] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -72,7 +75,7 @@ const Producers = () => {
                         <strong>Contacto:</strong>
                         <p>{producer.contact1}</p>
                         <p>{producer.contact2}</p>
-                        <button onClick={() => window.open(`/mercadolingham/producer/${producer.id}`, '_blank')}>Ver más</button>
+                        <button onClick={() => navigate(`/mercadolingham/producer/${producer.id}`)}>Ver más</button>
                     </div>
                 </div>
             ))}
